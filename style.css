@@ -1,0 +1,429 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFCF3;
+    margin: 0;
+    padding: 0;
+    
+    
+
+
+}
+
+
+ul li .nav-items-active{
+    text-decoration: none;
+    color: #FD725C;
+    font-weight: 600;
+    border-bottom: solid #FD725C;
+}
+
+ul li .nav-items{
+    color: #393535;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+ul li .nav-items:hover{
+    text-decoration: none;
+    color: #FD725C;
+    font-weight: 600;
+    
+}
+
+.btn_masuk{
+    background-color: #FD725C;
+    color: #FFF;
+    font-weight: 600;
+    width: 100px;
+    padding: 5px;
+    font-size: 14px;
+    border: none;
+    text-decoration: none;
+}
+
+.content-1{
+    background-color: #393535;
+    height: auto;
+    background-image: url("assets/bgImage.jpg");
+    background-size: cover;
+}
+
+.content-2{
+    height: 650px;
+}
+
+.content-2 h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+    
+}
+
+.content-2 hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 30%;
+}
+
+
+
+.content-2 .card{
+    width: 222px;
+    height: 305px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+    padding-top: 20px;
+}
+
+.content-2 .btn-detail{
+    width: 80px;
+    background-color: #FD725C;
+    color: #FFF;
+    font-weight: 600;
+    padding: 8px;
+    font-size: 10px;
+    border: none;
+    text-decoration: none;
+
+}
+
+.content-3{
+    height: 815px; 
+    background-color:#FFCA0B;
+    padding: 100px;
+}
+
+.content-3 h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFF;
+    text-align: center;
+    
+}
+
+.content-3 hr{
+    height:1px;
+    border-width:5px;
+    color: #FD725C;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.content-3 .container{
+    height: 700px;
+    width: 795px;
+}
+
+.content-3 img{
+    width: 795px;
+    height: 495px;
+    
+}
+
+.content-4{
+    height: 800px;
+}
+
+.content-4 .advantage{
+    width: 1096px;
+    border-radius: 30px;
+    box-shadow: 0.3px 0.3px 0.3px #393535;
+    height: 226px;
+    margin: auto;
+    margin-top: 200px;
+    padding: 20px;
+}
+
+.content-4 .advantage-title{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.content-4 .go-to-search{
+    width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF8E0;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 40px;
+    height: auto;
+}
+
+footer{
+    background-color: #FD725C;
+    color: #FFF;
+    margin-top: auto; /* This pushes the footer to the bottom */
+    padding-top: 0; /* Remove any top padding if necessary */
+}
+
+
+
+.kategori-jajanan h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+
+.kategori-jajanan hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.category p{
+    margin-top: 20px;
+
+
+}
+
+.all-jajanan h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+
+.all-jajanan hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.all-jajanan .card{
+    width: 222px;
+    height: 305px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+}
+
+.all-jajanan .btn-detail{
+    width: 80px;
+    background-color: #FD725C;
+    color: #FFF;
+    font-weight: 600;
+    padding: 8px;
+    font-size: 11px;
+    border: none;
+
+}
+
+.all-jajanan .btn-detail-text{
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 500;
+}
+
+
+
+.search-box{
+    background-color: #393535;
+    height: 680px;
+    background-image: url("assets/bgImage.jpg");
+    background-size: cover;
+    
+}
+
+.search-box .container{
+    width: 765px;
+}
+
+.search-box .form-cari{
+    width: 595px;
+    margin: auto;
+}
+
+.search-box .form-cari-btn{
+    width: 155px;
+    height: 60px;
+}
+
+.search-box h1{
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 800x;
+}
+
+.search-box p{
+    font-size: 21px;
+    font-weight: 600;
+    color: #504F4F;
+}
+
+
+
+.description-detail{
+    width: 660px;
+    height: 300px;
+    background-color: white;
+    opacity: 93%;
+    border-radius: 0px 30px 0px 0px;
+    padding: 20px;
+}
+
+.sec-nav{
+    width :  100%;
+    height: 90px;
+    background-color: #FD725C;
+}
+
+.sec-nav a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    position: sticky;
+}
+
+.location{
+    height: 730px;
+}
+.location img{
+    width: 100%;
+    height: auto;
+}
+.location h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+
+
+
+.location hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.route{
+    height: 765px;
+    background-color: #FFF8E0;
+}
+
+.route img{
+    width: 100%;
+    height: auto;
+}
+
+.route h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+
+
+
+.route hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.all-products h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+
+
+
+.all-products hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.all-products .product-card{
+    background-color: white;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+}
+
+.review h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+
+}
+
+.review hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 10%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.review .review-card{
+    background-color: white;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+}
+
+.input-ulasan .container{
+    background-color: #FFF;
+    border-radius: 30px;
+    height: 500px;
+    margin: auto;
+    padding: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+}
+
+
+
+
+
+
