@@ -24,6 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['status' => 'Location updated']);
     } else {
         echo json_encode(['error' => 'Location update failed']);
+        echo "<script>
+    Swal.fire({
+        title: 'Update Gagal',
+        type : 'Danger',
+        icon: 'danger',
+        timer: 3000, // Auto-close the alert after 3 seconds
+        showConfirmButton: false // Remove the 'OK' button
+    });</script>";
     }
 
     $query->close();

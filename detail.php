@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         <div class="product-card mb-5">
           <div class="row">
             <div class="col-md-3 col-sm-12">
-              <img class="img-thumbnail" src="assets/batagor.png" alt="" />
+              <?php echo '<img style="width:125px;" src="data:image/jpeg;base64,' . base64_encode($rowProduct['thum_produk']) . '">'; ?>
             </div>
             <div class="col-md-3 col-sm-12">
               <h3><?php echo $rowProduct['nama_produk']; ?></h3>

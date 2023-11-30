@@ -3,6 +3,7 @@ body {
     background-color: #FFFCF3;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     
     
 
@@ -375,7 +376,7 @@ footer{
 
 .all-products .product-card{
     background-color: white;
-    width: fit-content;
+    width: 80%;
     height: auto;
     margin: auto;
     padding: 30px;
@@ -421,6 +422,58 @@ footer{
     padding: 30px;
     box-shadow: 0.5px 0.5px 0.5px #393535;
 }
+
+.profil-pedagang{
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0.5px 0.5px;
+}
+
+.profil-pedagang h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+    
+}
+
+.profil-pedagang hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.border-box{
+    border: 2px solid #FFCA0B;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+.tambah-produk{
+    background-color: #FFF;
+    padding: 30px;
+}
+
+.tambah-produk h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+    
+}
+
+.tambah-produk hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 30%;
+}
+
 
 
 

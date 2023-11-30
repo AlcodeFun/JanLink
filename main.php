@@ -38,6 +38,17 @@ if ($role === "pedagang") {
   <!-- Slick Carousel -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .slick-prev:before {
+      color: #ffca0b;
+      width: 200px;
+    }
+
+    .slick-next:before {
+      color: #ffca0b;
+      width: 200px;
+    }
+  </style>
 
 </head>
 
@@ -334,45 +345,44 @@ if ($role === "pedagang") {
       });
     </script>
     <script>
-      $(document).ready(function() {
-        $('.active-pedagang').slick({
-          dots: true,
-          infinite: true,
-          speed: 300,
-          slidesToShow: 4,
-          slidesToScroll: 2,
-          responsive: [{
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
-              }
-            },
-            {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                arrows: false
-              }
-            },
-            {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                arrows: false
-              }
+      $('.active-pedagang').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        responsive: [{
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
             }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-          ]
-        });
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              arrows: false
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
       });
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUSgX6T6vbH3lPftFDqw2-0_HXkrwFtHU&callback=initMap" defer></script>
 
     <script>

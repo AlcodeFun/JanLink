@@ -3,8 +3,6 @@ require 'dbconfig.php';
 
 $role = isset($_SESSION["role"]) ? $_SESSION["role"] : "";
 $dashboardLink = "";
-var_dump($_SESSION);
-echo $_SERVER["REQUEST_METHOD"];
 
 if ($role === "pedagang") {
   $dashboardLink = "dashboard_pedagang.php";
@@ -30,6 +28,17 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
   header("Location: main.php");
 }
 
+$dataPedagang = "SELECT * FROM pedagang WHERE ID_Pedagang= $pedagang_id";
+$resData = mysqli_query($conn, $dataPedagang);
+$rowData = mysqli_fetch_assoc($resData);
+$idCategory = $rowData['ID_Kategori'];
+$query_category = "SELECT nama_kategori FROM kategori WHERE ID_Kategori=$idCategory";
+$resDataCategory = mysqli_query($conn, $query_category);
+$rowDataCat = mysqli_fetch_assoc($resDataCategory);
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -48,6 +57,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
 
   <!-- Font Awesome Kit -->
   <script src="https://kit.fontawesome.com/05f405bcb5.js" crossorigin="anonymous"></script>
@@ -82,6 +92,14 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
       border: none;
       text-decoration: none;
     }
+
+    .form-check-input {
+      background-color: #FFF;
+    }
+
+    .form-check-input:checked {
+      background-color: #FD725C;
+    }
   </style>
 </head>
 
@@ -93,12 +111,14 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="main.php" class="nav-items px-2">Beranda</a></li>
-      <li><a href="#" class="nav-items px-2">Status</a></li>
-      <li><a href="#" class="nav-items-active px-2">Produk</a></li>
+      <li><a href="#" class="nav-items-active px-2">Profil</a></li>
+      <li><a href="tambah_produk.php" class="nav-items px-2">Tambah Produk</a></li>
+      <li><a href="lihat_produk.php" class="nav-items px-2">Lihat Produk</a></li>
     </ul>
 
     <div class="col-md-3 col-sm-auto text-end me-md-auto">
+      <a type='button' class='btn_masuk rounded-2 text-decoration-none text-center me-3' href='main.php'><i class="fa-solid fa-house me-2" style="color: #ffffff;"></i>Beranda</a>
+
       <?php
       if (isset($_SESSION['id'])) {
         echo "<a type='button' class='btn_masuk  rounded-5 text-decoration-none text-center' href='logout.php'>Keluar</a>";
@@ -113,85 +133,91 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
 
 
 
-  <div class="container">
-    <p>Status Pedagang</p>
-    <div class="form-check form-switch">
-      <?php
-      $statusQuery = "SELECT status FROM pedagang WHERE ID_Pedagang = $pedagang_id";
-      $result = $conn->query($statusQuery);
+  <div class="container profil-pedagang mt-4 mb-4">
+    <h2 class="mb-3 mt-5">Profil</h2>
+    <hr class="ms-auto me-auto mb-5" />
+    <h6>Status Pedagang</h6>
+    <div class="status-pedagang border-box mb-4">
 
-      if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $currentStatus = $row['status'];
+      <div class="form-check form-switch">
+        <?php
+        $statusQuery = "SELECT status FROM pedagang WHERE ID_Pedagang = $pedagang_id";
+        $result = $conn->query($statusQuery);
 
-        // Set the value of the switch input based on the current status
-        $isChecked = ($currentStatus == 'Aktif') ? 'checked' : '';
+        if ($result->num_rows == 1) {
+          $row = $result->fetch_assoc();
+          $currentStatus = $row['status'];
 
-        echo '<input class="form-check-input" type="checkbox" name="status" id="flexSwitchCheckDefault" value="on" ' . $isChecked . '>';
+          // Set the value of the switch input based on the current status
+          $isChecked = ($currentStatus == 'Aktif') ? 'checked' : '';
+
+          echo '<input class="form-check-input" type="checkbox" name="status" id="flexSwitchCheckDefault" value="on" ' . $isChecked . '>';
+        }
+        ?>
+
+
+        <label class="form-check-label " for="flexSwitchCheckDefault">
+          <?php
+          if ($currentStatus == 'Aktif') {
+            echo "Aktif";
+          } else {
+            echo "Non-Aktif";
+          } ?>
+        </label>
+
+
+
+
+
+      </div>
+    </div>
+    <h6>Nama Pedagang</h6>
+    <div class="nama-pedagang border-box mb-4">
+
+      <b><?php echo $rowData['Nama_Pedagang'] ?></b>
+
+    </div>
+    <h6>Nama Jajanan</h6>
+    <div class="nama-jajanan border-box mb-4">
+
+      <b><?php echo $rowData['Nama_Jajanan'] ?></b>
+
+    </div>
+
+    <h6>Deskripsi</h6>
+    <div class="nama-deskripsi border-box mb-4">
+
+      <p><?php echo $rowData['Deskripsi'] ?></p>
+
+    </div>
+    <h6>No Handphone/WhatsApp</h6>
+    <div class="nama-hp border-box mb-4">
+
+      <p><?php echo $rowData['No_HP'] ?></p>
+
+    </div>
+
+    <h6>Kategori</h6>
+    <div class="kategori border-box mb-4">
+
+      <p><?php echo $rowDataCat['nama_kategori'] ?></p>
+
+    </div>
+    <h6>Thumbnail</h6>
+    <div class="thumbnail border-box mb-4">
+      <?php if (!empty($rowData['Thumbnail'])) {
+        echo '<img src="data:image/jpeg;base64,' . base64_encode($rowData['Thumbnail']) . '">';
       }
       ?>
-      <label class="form-check-label" for="flexSwitchCheckDefault">Aktif/Non-Aktif</label>
+
+
+
+
     </div>
+
   </div>
 
-  <!-- Pedagang Table -->
-  <!-- <div id="pedagang-table" class="container mt-3">
-    <h2>Pedagang Table</h2>
-    <div class="container mt-5"> -->
 
-  <!-- Display table -->
-  <!-- <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Merchant ID</th>
-              <th>Thumbnail</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="productTableBody"> -->
-  <!-- Table data will be loaded here using AJAX -->
-  <!-- </tbody>
-        </table>
-      </div> -->
-
-  <!-- Modal for Add and Edit Product -->
-  <!-- <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true"> -->
-  <!-- Modal content will be loaded here using AJAX -->
-  <!-- </div>
-    </div>
-  </div> -->
-
-  <!-- Produk Table -->
-  <!-- <div id="produk-table" class="container mt-3">
-    <h4>Produk Table</h4>
-    <div class="container">
-      <h6>Tambah Produk</h6>
-      <form action="server-pedagang.php" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="nama_produk">Nama Produk:</label>
-          <input type="text" class="form-control" name="nama_produk" id="nama_produk" required>
-        </div>
-        <div class="form-group">
-          <label for="deskripsi">Deskripsi:</label>
-          <textarea class="form-control" name="deskripsi" id="deskripsi" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="harga">Harga:</label>
-          <input type="number" class="form-control" name="harga" id="harga" required>
-        </div>
-        <div class="form-group">
-          <label for="gambar_produk">Gambar Produk</label>
-          <input type="file" class="form-control-file" name="gambar_produk" id="gambar_produk" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Insert</button>
-      </form>
-    </div>
-  </div> -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js">
   </script>
@@ -213,6 +239,45 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == 'pedagang') {
       });
     });
   </script>
-  <script src="pedagang-crud.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkbox = document.getElementById('flexSwitchCheckDefault');
+      var label = document.querySelector('.form-check-label');
+
+      checkbox.addEventListener('change', function() {
+        label.textContent = this.checked ? 'Aktif' : 'Non-Aktif';
+
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      <?php
+      // Check for success message in the session
+      if (isset($_SESSION['success_message'])) {
+        // Display SweetAlert for success
+        echo "Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{$_SESSION['success_message']}',
+            });";
+        // Unset the session variable to avoid displaying the message on page reload
+        unset($_SESSION['success_message']);
+      } elseif (isset($_SESSION['error_message'])) {
+        // Display SweetAlert for error
+        echo "Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{$_SESSION['error_message']}',
+            });";
+        // Unset the session variable to avoid displaying the message on page reload
+        unset($_SESSION['error_message']);
+      }
+      ?>
+    });
+  </script>
 
 </body>
+
+</html>
