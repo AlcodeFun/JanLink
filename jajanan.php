@@ -134,14 +134,14 @@ $resAllJajanan = $conn->query($queryAllJajanan);
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="main.php" class="nav-items px-2">Beranda</a></li>
-      <li><a href="#" class="nav-items-active px-2">Jajanan</a></li>
+      <li><a href="main.php" class="nav-items-active px-2">Beranda</a></li>
+      <li><a href="jajanan.php" class="nav-items px-2">Jajanan</a></li>
       <li><a href="cari.php" class="nav-items px-2">JanAI</a></li>
       <?php
       if ($role === "pedagang") {
         echo '<li><a href="dashboard_pedagang.php" class="nav-items px-2">Dashboard</a></li>';
       } elseif ($role === "admin") {
-        echo '<li><a href="dashboard_admin.php" class="nav-items px-2">Dashboard</a></li>';
+        echo '<li><a href="dashboardAdmin/home.php" class="nav-items px-2">Dashboard</a></li>';
       }
       ?>
     </ul>
@@ -157,6 +157,8 @@ $resAllJajanan = $conn->query($queryAllJajanan);
       ?>
 
     </div>
+
+
   </header>
   <div class="kategori-jajanan">
     <h2 class="text-center mt-5 mb-4">Kategori Jajanan</h2>

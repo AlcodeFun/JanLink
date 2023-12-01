@@ -474,6 +474,44 @@ footer{
     width: 30%;
 }
 
+.container-xxl h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+.container-xxl hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 30%;
+
+}
+
+.result-search .card{
+    width: 222px;
+    height: 305px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0.5px 0.5px 0.5px #393535;
+    padding-top: 20px;
+}
+
+.result-search .btn-detail{
+    width: 80px;
+    background-color: #FD725C;
+    color: #FFF;
+    font-weight: 600;
+    padding: 8px;
+    font-size: 10px;
+    border: none;
+    text-decoration: none;
+
+}
+
+
 
 
 

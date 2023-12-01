@@ -186,7 +186,7 @@
                     $_SESSION["id"] = $row["ID"];
                     $_SESSION["role"] = "admin";
                     $ID_User = $row["ID"];
-                    $actionUrl = 'dashboard_admin.php';
+                    $actionUrl = 'dashboardAdmin/home.php';
 
                     // Use JavaScript to show the modal
                     echo '<script>

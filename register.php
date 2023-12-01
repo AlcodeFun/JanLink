@@ -80,8 +80,10 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $repassword = $_POST["repassword"];
-        $duplicate = mysqli_query($conn, "SELECT * FROM pembeli WHERE username='$username' OR email='$email'");
-        if (mysqli_num_rows($duplicate) > 0) {
+
+        $duplicatePedagang = mysqli_query($conn, "SELECT * FROM pedagang WHERE username='$username' OR email='$email'");
+        $duplicatePembeli = mysqli_query($conn, "SELECT * FROM pembeli WHERE username='$username' OR email='$email'");
+        if (mysqli_num_rows($duplicatePedagang) > 0 || mysqli_num_rows($duplicatePembeli)) {
             echo "<script>
             Swal.fire({
                 title: 'Duplikat',

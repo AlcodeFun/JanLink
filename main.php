@@ -22,8 +22,9 @@ if ($role === "pedagang") {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>JanLink</title>
+
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/assets/logo-rounded.png" />
+  <link rel="icon" type="image/x-icon" href="/assets/favicon-janlink.png" />
   <!-- Bootstrap CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
@@ -59,14 +60,14 @@ if ($role === "pedagang") {
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="#" class="nav-items-active px-2">Beranda</a></li>
+      <li><a href="main.php" class="nav-items-active px-2">Beranda</a></li>
       <li><a href="jajanan.php" class="nav-items px-2">Jajanan</a></li>
       <li><a href="cari.php" class="nav-items px-2">JanAI</a></li>
       <?php
       if ($role === "pedagang") {
         echo '<li><a href="dashboard_pedagang.php" class="nav-items px-2">Dashboard</a></li>';
       } elseif ($role === "admin") {
-        echo '<li><a href="dashboard_admin.php" class="nav-items px-2">Dashboard</a></li>';
+        echo '<li><a href="dashboardAdmin/home.php" class="nav-items px-2">Dashboard</a></li>';
       }
       ?>
     </ul>
