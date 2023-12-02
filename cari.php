@@ -33,11 +33,7 @@ if ($role === "pedagang") {
   <!-- Font Awesome Kit -->
   <script src="https://kit.fontawesome.com/05f405bcb5.js" crossorigin="anonymous"></script>
 
-  <style>
-    .result-search {
-      display: none;
-    }
-  </style>
+
 </head>
 
 <body>
@@ -75,25 +71,40 @@ if ($role === "pedagang") {
   </header>
 
   <div class="search-box d-flex align-items-center justify-content-center">
-    <div class="container text-center">
+    <div class="container text-center p-4">
       <h1>Mau cari jajan?</h1>
       <p class="mb-5">Temukan jajanan yang kamu mau disini</p>
       <div class="container">
-        <form id="searchForm" class="form-cari">
+        <!-- <form id="searchForm" class="form-cari">
 
           <div class="row me-4">
-            <div class="col-md-8 mb-2">
+            <div class="col-md-8  mb-2 ">
               <input style="height: 50px; width: 100%;" id="searchInput" class="form-control" type="search" placeholder="Cari Jajanan" aria-label="Search" name="cari" />
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
               <button class="form-cari-btn btn btn-danger" type="submit" style="height: 50px; width: 100%;">
                 <i class="fa-solid fa-magnifying-glass me-2" style="color: #ffffff"></i>Cari
               </button>
             </div>
           </div>
 
+        </form> -->
+        <form id="searchForm" class="form-cari">
+          <div class="form-group">
+            <div class="row d-flex gx-0">
+              <div class="col col-md-8 col-sm-12 justify-content-start mb-4">
+                <input style="height: 50px; width: 100%;" id="searchInput" class="form-control" type="search" placeholder="Cari Jajanan" aria-label="Search" name="cari" />
+              </div>
+              <div class="col col-md-4 col-sm-12 justify-content-start">
+                <button class="form-cari-btn btn btn-danger" type="submit" style="height: 50px;">
+                  <i class="fa-solid fa-magnifying-glass me-2" style="color: #ffffff"></i>Cari
+                </button>
+              </div>
+            </div>
+          </div>
         </form>
+
       </div>
 
 

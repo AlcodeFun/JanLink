@@ -401,7 +401,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
           // Set an interval to update the marker position every 30 seconds (adjust as needed)
           setInterval(function() {
             updateMarkerPosition(getlatitude, getlongitude);
-          }, 30000); // Update every 30 seconds
+          }, 10000);
           // Add an event listener to the "Get Location" button
           document.getElementById('get-location').addEventListener('click', function() {
             var mapLink = `https://www.google.com/maps/dir/?api=1&destination=${getlatitude},${getlongitude}`;
@@ -521,7 +521,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Set an interval to update the location every 30 seconds
         setInterval(() => {
           navigator.geolocation.getCurrentPosition(updateLocation, locationError, options);
-        }, 30000);
+        }, 10000);
       } else {
         console.error("Geolocation is not supported by your browser.");
       }

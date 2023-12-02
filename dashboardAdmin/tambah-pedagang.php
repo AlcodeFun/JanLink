@@ -203,7 +203,7 @@ $resultCat = $conn->query($catQuery);
 
                                 if (isset($_SESSION['id'])) {
 
-                                    echo "<a type='button' class='btn_masuk  rounded-5 text-decoration-none text-center' href='logout.php'>Keluar</a>";
+                                    echo "<a type='button' class='btn_masuk  rounded-5 text-decoration-none text-center' href='../logout.php'>Keluar</a>";
                                 } else {
                                     echo "<a type='button' class='btn_masuk rounded-5 text-decoration-none text-center' href='login.php'>Masuk</a>";
                                 }

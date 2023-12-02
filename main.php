@@ -89,16 +89,18 @@ if ($role === "pedagang") {
 
   <div class="content-1">
     <div class="row">
-      <div class="col-lg-6 col-sm-12 d-flex justify-content-center align-items-center mt-4">
+      <div class="col-lg-6 col-sm-12 d-flex justify-content-center align-items-center mt-4" style="min-height:500px ;">
         <div class="row">
           <div class="col">
             <h1>Mau Jajan?</h1>
             <p>Dengan beberapa klik, temukan jajanan di sekitarmu</p>
-            <form class="d-flex bg-light p-4 rounded-3 w-100" role="search">
-              <input class="form-control me-2" type="search" placeholder="Cari Jajanan" aria-label="Search" />
-              <a href="cari.html" class="btn btn-danger w-100" type="submit">
-                <i class="fa-solid fa-magnifying-glass me-3" style="color: #ffffff"></i>Cari
-              </a>
+            <form action="cari.php?cari=<?php if (isset($_GET['cari'])) {
+                                          echo $_GET['cari'];
+                                        } ?>#result-search" class="d-flex bg-light p-4 rounded-3 w-100" role="search">
+              <input class="form-control me-2" type="search" placeholder="Cari Jajanan" aria-label="Search" name="cari" />
+              <button class="form-cari-btn btn btn-danger" type="submit>
+                <i class=" fa-solid fa-magnifying-glass me-2" style="color: #ffffff"></i>Cari
+              </button>
             </form>
           </div>
         </div>
@@ -106,7 +108,7 @@ if ($role === "pedagang") {
         <div class="row"></div>
       </div>
       <div class="col-lg-6 col-sm-12 d-flex justify-content-end align-items-end mt-5">
-        <img class="imgContent1" src="assets/img-content1.png" alt="" />
+        <img class="imgContent1 img-fluid" style="max-height: 500px;" src="assets/img-content1.png" alt="" />
       </div>
     </div>
   </div>
@@ -200,254 +202,257 @@ if ($role === "pedagang") {
     </div>
   </div>
 
-  <div class="content-4 mt-6">
-    <div class="advantage d-flex align-items-center">
-      <div class="row">
-        <!-- Advantage 1 -->
-        <div class="col-md-4 col-sm-12 mb-4 p-4" style="background-color: #ffffff; border-radius:5px;">
-          <div class="row align-items-center">
-            <div class="col-md-5 col-sm-12 m-auto">
-              <img src="assets/adv-1.png" alt="" class="img-fluid" />
-            </div>
-            <div class="col-md-7 col-sm-12">
-              <p class="advantage-title">Lokasi <br />Terkini</p>
-              <p class="text-wrap">
-                Anda dapat melihat lokasi terkini pedagang keliling
-              </p>
-            </div>
-          </div>
-        </div>
+  <div class="content-4">
 
-        <!-- Advantage 2 -->
-        <div class="col-md-4 col-sm-12 mb-4 p-4" style="background-color: #ffffff; border-radius:5px;">
-          <div class="row align-items-center">
-            <div class="col-md-5 col-sm-12 m-auto">
-              <img src="assets/adv-2.png" alt="" class="img-fluid" />
-            </div>
-            <div class="col-md-7 col-sm-12">
-              <p class="advantage-title">Hemat Tenaga & <br />Waktu</p>
-              <p class="text-wrap">
-                Tak perlu repot mencari. Ketahui lokasi atau panggil jajanan favoritmu
-              </p>
-            </div>
-          </div>
-        </div>
+    <!-- ***** Features Small Start ***** -->
+    <section class="section home-feature p-5">
+      <div class="container p-4 d-flex" style="background-color: #ffffff;box-shadow: 0.5px 0.5px 0.5px #393535;border-radius:30px;">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-12">
+            <div class="row">
+              <!-- ***** Features Small Item Start ***** -->
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
+                <div class="features-small-item">
+                  <div class="icon mb-3">
+                    <i><img src="assets/adv-1.png" alt=""></i>
+                  </div>
+                  <h5 class="features-title">Lokasi</h5>
+                  <p> Anda dapat melihat lokasi terkini pedagang keliling</p>
+                </div>
+              </div>
+              <!-- ***** Features Small Item End ***** -->
 
-        <!-- Advantage 3 -->
-        <div class="col-md-4 col-sm-12 mb-4 p-4" style="background-color: #ffffff; border-radius:5px;">
-          <div class="row align-items-center">
-            <div class="col-md-5 col-sm-12 m-auto">
-              <img src="assets/adv-3.png" alt="" class="img-fluid" />
-            </div>
-            <div class="col-md-7 col-sm-12">
-              <p class="advantage-title">Informasi <br />Akurat</p>
-              <p class="text-wrap">
-                Informasi akurat mulai dari informasi produk hingga lokasi
-              </p>
+              <!-- ***** Features Small Item Start ***** -->
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
+                <div class="features-small-item">
+                  <div class="icon mb-3">
+                    <i><img src="assets/adv-2.png" alt=""></i>
+                  </div>
+                  <h5 class="features-title">Hemat Tenaga & Waktu</h5>
+                  <p>Tak perlu repot mencari. Ketahui lokasi atau panggil jajanan favoritmu</p>
+                </div>
+              </div>
+              <!-- ***** Features Small Item End ***** -->
+
+              <!-- ***** Features Small Item Start ***** -->
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
+                <div class="features-small-item">
+                  <div class="icon mb-3">
+                    <i><img src="assets/adv-3.png" alt=""></i>
+                  </div>
+                  <h5 class="features-title">Ultimate Marketing</h5>
+                  <p> Informasi akurat mulai dari informasi produk hingga lokasi</p>
+                </div>
+              </div>
+              <!-- ***** Features Small Item End ***** -->
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <!-- ***** Features Small End ***** -->
+  </div>
 
 
 
+  <div class="container mb-5 d-flex justify-content-center">
     <div class="go-to-search container">
       <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <img src="assets/nasgor.png" alt="" />
+        <div class="col-md-6 col-sm-12 justify-content-center">
+          <img src="assets/nasgor.png" alt="" class="img-fluid" />
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12 justify-content-center">
           <h1>"Ingin Cari Saya?"</h1>
           <p>Klik tombol di bawah ini</p>
           <a href="cari.php" class="btn btn-danger">Cari Pedagang Keliling</a>
         </div>
       </div>
     </div>
+  </div>
 
 
-    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 border-top justify-content-center align-items-start">
-      <div class="col mb-3 p-4 rounded-3 mt-4" style="background-color: white;">
+  <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 border-top justify-content-center align-items-start">
+    <div class="col mb-3 p-4 rounded-3 mt-4" style="background-color: white;">
 
-        <a href="#" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-          <img width="" src="assets/logo-janlink.png" alt="" />
-        </a>
-        <p class="text-body-secondary text-justify">
-          JanLink merupakan sebuah website penguhubung antara pedagang keliling
-          dan pembeli di sekitar Kota Bogor berbasis GIS
-        </p>
+      <a href="#" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+        <img width="" src="assets/logo-janlink.png" alt="" />
+      </a>
+      <p class="text-body-secondary text-justify">
+        JanLink merupakan sebuah website penguhubung antara pedagang keliling
+        dan pembeli di sekitar Kota Bogor berbasis GIS
+      </p>
 
 
-      </div>
+    </div>
 
-      <div class="col mb-3 ms-5 mt-4">
-        <h5>Menu</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Beranda</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Jajanan</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Cari Jajan</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Dashboard</a>
-          </li>
-        </ul>
-      </div>
+    <div class="col mb-3 ms-5 mt-4">
+      <h5>Menu</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Beranda</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Jajanan</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Cari Jajan</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Dashboard</a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="col mb-3 ms-5 mt-4">
-        <h5>Kontak</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Home</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">About</a>
-          </li>
-        </ul>
-      </div>
+    <div class="col mb-3 ms-5 mt-4">
+      <h5>Kontak</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Home</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Features</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="#" class="nav-link p-0 text-body-secondary">About</a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="col mb-3 ms-4 mt-4">
-        <h5 class="ms-2">Ikuti Kami</h5>
-        <ul class="nav list-unstyled">
-          <li class="ms-3">
-            <a class="text-body-secondary" href="#"><i class="fa-brands fa-instagram"></i></a>
-          </li>
-          <li class="ms-3">
-            <a class="text-body-secondary" href="#"><i class="fa-brands fa-youtube"></i></a>
-          </li>
-          <li class="ms-3">
-            <a class="text-body-secondary" href="#"><i class="fa-brands fa-twitter"></i></a>
-          </li>
-        </ul>
-      </div>
-      <p class="text-center text-body-secondary">&copy; 2023 Company, Inc</p>
-    </footer>
+    <div class="col mb-3 ms-4 mt-4">
+      <h5 class="ms-2">Ikuti Kami</h5>
+      <ul class="nav list-unstyled">
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#"><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#"><i class="fa-brands fa-youtube"></i></a>
+        </li>
+        <li class="ms-3">
+          <a class="text-body-secondary" href="#"><i class="fa-brands fa-twitter"></i></a>
+        </li>
+      </ul>
+    </div>
+    <p class="text-center text-body-secondary">&copy; 2023 Company, Inc</p>
+  </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script>
-      // JavaScript to handle button click and page refresh
-      document.getElementById('refreshButton').addEventListener('click', function() {
-        location.reload(true); // true parameter forces a full page reload from the server
-      });
-    </script>
-    <script>
-      $('.active-pedagang').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        responsive: [{
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              arrows: false
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              arrows: false
-            }
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    // JavaScript to handle button click and page refresh
+    document.getElementById('refreshButton').addEventListener('click', function() {
+      location.reload(true); // true parameter forces a full page reload from the server
+    });
+  </script>
+  <script>
+    $('.active-pedagang').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 2,
+      responsive: [{
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
           }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
-      });
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUSgX6T6vbH3lPftFDqw2-0_HXkrwFtHU&callback=initMap" defer></script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', getLocation);
-
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(initMap);
-        } else {
-          alert("Geolocation is not supported by this browser.");
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            arrows: false
+          }
         }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+    });
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUSgX6T6vbH3lPftFDqw2-0_HXkrwFtHU&callback=initMap" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', getLocation);
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(initMap);
+      } else {
+        alert("Geolocation is not supported by this browser.");
       }
+    }
 
-      function initMap(position) {
-        var userLatitude = position.coords.latitude;
-        var userLongitude = position.coords.longitude;
+    function initMap(position) {
+      var userLatitude = position.coords.latitude;
+      var userLongitude = position.coords.longitude;
 
-        var map = new google.maps.Map(document.querySelector('.near-pedagang'), {
-          center: {
-            lat: userLatitude,
-            lng: userLongitude
-          },
-          zoom: 15
-        });
+      var map = new google.maps.Map(document.querySelector('.near-pedagang'), {
+        center: {
+          lat: userLatitude,
+          lng: userLongitude
+        },
+        zoom: 15
+      });
 
-        // Fetch nearby pedagang locations
-        $.ajax({
-          type: "POST",
-          url: "get-near-pedagang.php",
-          data: {
-            latitude: userLatitude,
-            longitude: userLongitude
-          },
-          success: function(response) {
-            // Parse the JSON response
-            var nearPedagang = JSON.parse(response);
+      // Fetch nearby pedagang locations
+      $.ajax({
+        type: "POST",
+        url: "get-near-pedagang.php",
+        data: {
+          latitude: userLatitude,
+          longitude: userLongitude
+        },
+        success: function(response) {
+          // Parse the JSON response
+          var nearPedagang = JSON.parse(response);
 
-            // Add markers for nearby pedagang
-            nearPedagang.forEach(function(pedagang) {
-              // Specify the path to the custom marker icon image
-              var customMarkerIcon = {
-                url: 'assets/markerIcon.png',
-                scaledSize: new google.maps.Size(50, 50) // Adjust the width and height as needed
-              };
+          // Add markers for nearby pedagang
+          nearPedagang.forEach(function(pedagang) {
+            // Specify the path to the custom marker icon image
+            var customMarkerIcon = {
+              url: 'assets/markerIcon.png',
+              scaledSize: new google.maps.Size(50, 50) // Adjust the width and height as needed
+            };
 
-              // Create a marker with a custom icon
-              var marker = new google.maps.Marker({
-                position: {
-                  lat: parseFloat(pedagang.Latitude),
-                  lng: parseFloat(pedagang.Longitude)
-                },
-                map: map,
-                title: pedagang.Nama_Jajanan,
-                icon: customMarkerIcon
-              });
-
+            // Create a marker with a custom icon
+            var marker = new google.maps.Marker({
+              position: {
+                lat: parseFloat(pedagang.Latitude),
+                lng: parseFloat(pedagang.Longitude)
+              },
+              map: map,
+              title: pedagang.Nama_Jajanan,
+              icon: customMarkerIcon
             });
-          },
-          error: function(error) {
-            console.log("Error:", error);
-          }
-        });
-      }
-    </script>
+
+          });
+        },
+        error: function(error) {
+          console.log("Error:", error);
+        }
+      });
+    }
+  </script>
 
 
 </body>
