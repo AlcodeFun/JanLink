@@ -32,6 +32,12 @@ if ($role === "pedagang") {
   <link rel="stylesheet" href="style.css" />
   <!-- Font Awesome Kit -->
   <script src="https://kit.fontawesome.com/05f405bcb5.js" crossorigin="anonymous"></script>
+
+  <style>
+    .result-search {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -95,16 +101,17 @@ if ($role === "pedagang") {
     </div>
   </div>
   <?php
-  if (isset($_GET['cari'])) {
+  $res_aktif = null; // Initialize $res_aktif to null
 
+  if (isset($_GET['cari'])) {
     $updateRating = "UPDATE pedagang AS p
-  JOIN (
-      SELECT ID_Pedagang, AVG(rating) AS avg_rating
-      FROM ulasan
-      GROUP BY ID_Pedagang
-  ) AS u
-  ON p.ID_Pedagang = u.ID_Pedagang
-  SET p.Rating = u.avg_rating";
+          JOIN (
+              SELECT ID_Pedagang, AVG(rating) AS avg_rating
+              FROM ulasan
+              GROUP BY ID_Pedagang
+          ) AS u
+          ON p.ID_Pedagang = u.ID_Pedagang
+          SET p.Rating = u.avg_rating";
 
     // Execute the rating update query
     $conn->query($updateRating);
@@ -113,59 +120,72 @@ if ($role === "pedagang") {
   }
 
 
-
   ?>
-  <div class="result-search ">
+  <div class="mb-4" style="height: 60px;" id="result-search"></div>
+
+  <div class=" result-search mt-5 col">
+
+    <div class="col">
+      <div class="row rekomendasi d-flex justify-content-center mt-5 mb-5" style="height: 600px; overflow:auto;">
 
 
-    <div class="row active-pedagang d-flex justify-content-center mt-5 mb-4">
-
-      <?php
-      if (mysqli_num_rows($res_aktif) > 0 && isset($_GET['cari'])) {
-        while ($row_aktif = $res_aktif->fetch_assoc()) {
-      ?>
-          <div class="col-md-12 mb-sm-4 d-flex justify-content-center">
-            <div class="card">
-              <div class="container p-4">
-                <div class="imgCard">
-                  <?php echo '<img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,' . base64_encode($row_aktif['Thumbnail']) . '">'; ?>
-                </div>
-                <div class="card-content text-start mt-2">
-                  <span class="active-status <?php echo $textcolor = ($row_aktif['Status'] == 'Aktif') ? 'text-success' : 'text-danger '; ?> fw-medium"><?php echo $row_aktif['Status'] ?></span>
-                  <h6><?php echo $row_aktif['Nama_Jajanan'] ?></h6>
-                  <p style="overflow:hidden; height:25px;"><?php echo $row_aktif['Deskripsi'] ?></p>
-                  <div class="row">
-                    <div class="col-4">
-                      <i class="fa-solid fa-star fa-bounce" style="color: #ffca0b"></i>
-                      <span class="rating"><?php echo $row_aktif['Rating'] ?></span>
+        <div class="result-search mt-5">
+          <?php
+          if (!is_null($res_aktif) && mysqli_num_rows($res_aktif) > 0 && isset($_GET['cari'])) {
+            echo '<h2>Rekomendasi Untukmu</h2>';
+            echo '<hr class="ms-auto me-auto mb-5">';
+            echo '<div class="row rekomendasi d-flex justify-content-center mt-5 mb-5 ms-auto me-auto">';
+            while ($row_aktif = $res_aktif->fetch_assoc()) {
+          ?>
+              <div class="col-md-4 mb-sm-5 d-flex justify-content-center">
+                <div class="card">
+                  <div class="container p-4">
+                    <div class="imgCard">
+                      <?php echo '<img class="img-fluid img-thumbnail" src="data:image/jpeg;base64,' . base64_encode($row_aktif['Thumbnail']) . '">'; ?>
                     </div>
-                    <div class="col-8">
-                      <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-3">
-                          <a href="https://wa.me/<?php echo $row_aktif['No_HP'] ?>">
-                            <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #2ff957; width: 30px"></i>
-                          </a>
+                    <div class="card-content text-start mt-2">
+                      <span class="active-status <?php echo $textcolor = ($row_aktif['Status'] == 'Aktif') ? 'text-success' : 'text-danger '; ?> fw-medium"><?php echo $row_aktif['Status'] ?></span>
+                      <h6><?php echo $row_aktif['Nama_Jajanan'] ?></h6>
+                      <p style="overflow:hidden; height:25px;"><?php echo $row_aktif['Deskripsi'] ?></p>
+                      <div class="row">
+                        <div class="col-4">
+                          <i class="fa-solid fa-star fa-bounce" style="color: #ffca0b"></i>
+                          <span class="rating"><?php echo $row_aktif['Rating'] ?></span>
                         </div>
-                        <div class="col-9">
-                          <button class="rounded-5 btn-detail">
-                            <a class="btn-detail-text text-decoration-none text-light" href="detail.php?jajanan=<?php echo $row_aktif['Nama_Jajanan'] ?>">Lihat Detail</a>
-                          </button>
+                        <div class="col-8">
+                          <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-3">
+                              <a href="https://wa.me/<?php echo $row_aktif['No_HP'] ?>">
+                                <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #2ff957; width: 30px"></i>
+                              </a>
+                            </div>
+                            <div class="col-9">
+                              <button class="rounded-5 btn-detail">
+                                <a class="btn-detail-text text-decoration-none text-light" href="detail.php?jajanan=<?php echo $row_aktif['Nama_Jajanan'] ?>">Lihat Detail</a>
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-      <?php }
-      } else {
-        echo "</div>";
-        echo '<img class="img-fluid w-100 mt-6" src="assets/no-active.png" alt="" />';
-      } ?>
+          <?php
+            }
+            echo '</div>';
+          } else if (isset($_GET['cari'])) {
 
-
+            echo '<img class="img-fluid w-100 mt-6" src="assets/not_found.png" alt="" />';
+          }
+          ?>
+        </div>
+      </div>
     </div>
+
+
+
+  </div>
   </div>
 
   <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 border-top justify-content-center align-items-start">
@@ -245,74 +265,8 @@ if ($role === "pedagang") {
       // Get the search term from the input field
       var searchTerm = document.getElementById('searchInput').value;
 
-      // Send an AJAX request to the PHP script with POST method
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          // Parse the JSON response
-          var results = JSON.parse(xhr.responseText);
-
-          // Update the HTML content based on the search results
-          updateSearchResults(results);
-        }
-      };
-      xhr.open('POST', 'search_pedagang.php', true);
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.send('term=' + searchTerm);
-    }
-
-    // Function to update HTML content based on search results
-    function updateSearchResults(results) {
-      var container = document.getElementById('searchResultsContainer');
-
-      // Clear previous results
-      container.innerHTML = '';
-
-      // Check if there are any results
-      if (results.length > 0) {
-        // Render the cards for each result
-        results.forEach(function(product) {
-          container.innerHTML += `
-                <div class="col-lg-3 col-md-4 col-sm-12 mb-sm-4 d-flex justify-content-center">
-                  <div class="card">
-                    <div class="container p-4">
-                      <div class="imgCard">
-                        <img class="img-fluid img-thumbnail" src="${product.Thumbnail}" alt="" />
-                      </div>
-                      <div class="card-content text-start mt-2">
-                        <span class="active-status ${product.Status === 'Aktif' ? 'text-success' : 'text-danger'} fw-medium">${product.Status}</span>
-                        <h6>${product.Nama_Jajanan}</h6>
-                        <p style="height:25px; overflow:hidden;">${product.Deskripsi}</p>
-                        <div class="row">
-                          <div class="col-4">
-                            <i class="fa-solid fa-star fa-bounce" style="color: #ffca0b"></i>
-                            <span class="rating">${product.Rating}</span>
-                          </div>
-                          <div class="col-8">
-                            <div class="row d-flex justify-content-center align-items-center">
-                              <div class="col-3">
-                                <a href="https://wa.me/${product.No_HP}">
-                                  <i class="fa-brands fa-square-whatsapp fa-xl" style="color: #2ff957; width: 30px"></i>
-                                </a>
-                              </div>
-                              <div class="col-9">
-                                <button class="rounded-5 btn-detail">
-                                  <a class="btn-detail-text" href="detail.php?jajanan=${product.Nama_Jajanan}">Lihat Detail</a>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;;
-        });
-      } else {
-        // No matches found, display a message
-        container.innerHTML = '<p>No match found</p>';
-      }
+      // Reload the page with the search term as a query parameter
+      window.location.href = 'cari.php?cari=' + encodeURIComponent(searchTerm) + '#result-search';
     }
 
     // Add an event listener to trigger the search when the form is submitted
@@ -320,7 +274,24 @@ if ($role === "pedagang") {
       event.preventDefault();
       searchPedagang();
     });
+
+    // Check if there is a hash in the URL and scroll to the corresponding element
+    window.onload = function() {
+      var hash = window.location.hash;
+      if (hash) {
+        var element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      // Show the result-search div after the page has loaded
+      document.querySelector('.result-search').style.display = 'block';
+    };
   </script>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -187,12 +187,12 @@ $chartDataJSON = json_encode($chartData);
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="tambah-pedagang.php" class="menu-link">
+                                <a href="tambah-kategori.php" class="menu-link">
                                     <div data-i18n="Perfect Scrollbar">Tambah Kategori</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="tambah-pedagang.php" class="menu-link">
+                                <a href="lihat-kategori.php" class="menu-link">
                                     <div data-i18n="Perfect Scrollbar">Lihat Kategori</div>
                                 </a>
                             </li>

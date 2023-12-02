@@ -1,10 +1,36 @@
 <?php
 require '../dbconfig.php';
+// Include your database connection code here
 
-if ($_SESSION['role'] != 'admin') {
-    header("Location: ../main.php");
+// Fetch data from the database
+$pedagangCount = 0;
+$pembeliCount = 0;
+
+
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Count the number of sellers
+$pedagangQuery = $conn->query('SELECT COUNT(*) as pedagangCount FROM pedagang');
+$pedagangCount = $pedagangQuery->fetch_assoc()['pedagangCount'];
+
+// Count the number of buyers
+$pembeliQuery = $conn->query('SELECT COUNT(*) as pembeliCount FROM pembeli');
+$pembeliCount = $pembeliQuery->fetch_assoc()['pembeliCount'];
+
+// Prepare data for Chart.js
+$chartData = [
+    'labels' => ['Pedagang', 'Pembeli'],
+    'data' => [$pedagangCount, $pembeliCount],
+];
+
+// Convert data to JSON for JavaScript
+$chartDataJSON = json_encode($chartData);
 ?>
+
 
 
 <!DOCTYPE html>
@@ -124,7 +150,7 @@ if ($_SESSION['role'] != 'admin') {
                             <i class="menu-icon tf-icons mdi mdi-table"></i>
                             <div data-i18n="Extended UI">Pembeli</div>
                         </a>
-                        <ul class="menu-sub active">
+                        <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="lihat-pembeli.php" class="menu-link">
                                     <div data-i18n="Perfect Scrollbar">Lihat Pembeli</div>
@@ -160,7 +186,7 @@ if ($_SESSION['role'] != 'admin') {
                             <div data-i18n="Extended UI">Kategori</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item active">
                                 <a href="tambah-kategori.php" class="menu-link">
                                     <div data-i18n="Perfect Scrollbar">Tambah Kategori</div>
                                 </a>
@@ -227,88 +253,24 @@ if ($_SESSION['role'] != 'admin') {
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h2>Daftar Pembeli</h2>
-                        <hr class="ms-auto me-auto mb-5">
-                        <div class="table-responsive">
-                            <table class="table  table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php
-
-                                    $sql = "SELECT * FROM pembeli";
-                                    $result = $conn->query($sql);
-
-                                    if ($result->num_rows > 0) {
-                                        $counter = 1;
-                                        while ($row = $result->fetch_assoc()) {
-
-
-                                            echo "<tr>
-                            <td>$counter</td>
-                            <td>{$row['Username']}</td>
-                            <td>{$row['Email']}</td>
-                           ";
-
-
-
-                                            $counter++;
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='6'>Belum ada pembeli</td></tr>";
-                                    }
-
-                                    ?>
-                                </tbody>
-                            </table>
+                        <div class="container mt-5">
+                            <h2>Tambah Kategori</h2>
+                            <hr class="ms-auto me-auto mb-5">
+                            <form action="tambah-kategori-server.php" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="nama_kategori" class="form-label">Nama Kategori</label>
+                                    <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gambar" class="form-label">Gambar Kategori</label>
+                                    <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*" required />
+                                </div>
+                                <button type="submit" class="btn btn-danger">Simpan</button>
+                            </form>
                         </div>
 
                     </div>
 
-
-
-                    <script>
-                        document.getElementById('createSpreadsheet').addEventListener('click', function() {
-                            var xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState === 4) {
-                                    if (xhr.status === 200) {
-                                        var response = JSON.parse(xhr.responseText);
-                                        if (response.success) {
-                                            // Replace alert with SweetAlert success message
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Spreadsheet created successfully!',
-                                                text: 'Path: ' + response.path,
-                                            });
-                                        } else {
-                                            // Replace alert with SweetAlert error message
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Failed to create spreadsheet.',
-                                            });
-                                        }
-                                    } else {
-                                        // Replace alert with SweetAlert error message
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error: ' + xhr.statusText,
-                                        });
-                                    }
-                                }
-                            };
-
-                            xhr.open('GET', 'sheets.php', true);
-                            xhr.send();
-                        });
-                    </script>
                 </div>
 
 
@@ -387,6 +349,38 @@ if ($_SESSION['role'] != 'admin') {
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            <?php
+            // Check for success message in the session
+            if (isset($_SESSION['success_kategori'])) {
+                // Display SweetAlert for success
+                echo "Swal.fire({
+                icon: 'success',
+                timer:'2000',
+                title: 'Berhasil!',
+                text: '{$_SESSION['success_kategori']}',
+                showConfirmButton: false
+            });";
+                // Unset the session variable to avoid displaying the message on page reload
+                unset($_SESSION['success_kategori']);
+            } elseif (isset($_SESSION['error_kategori'])) {
+                // Display SweetAlert for error
+                echo "Swal.fire({
+                icon: 'error',
+                timer:'2000',
+                title: 'Gagal!',
+                text: '{$_SESSION['error_kategori']}',
+                showConfirmButton: false
+            });";
+                // Unset the session variable to avoid displaying the message on page reload
+                unset($_SESSION['error_kategori']);
+            }
+            ?>
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua/C4z6Zaht6LeLZfJbf47P6KWpNMyW8jOG6Cr/Itg4PAO2E6b6uXMJXs" crossorigin="anonymous"></script>
 

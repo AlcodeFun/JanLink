@@ -511,6 +511,22 @@ footer{
 
 }
 
+.rekomendasi h2{
+    font-size: 30px;
+    font-weight: 700;
+    color: #FD725C;
+    text-align: center;
+
+}
+.rekomendasi hr{
+    height:1px;
+    border-width:5px;
+    color: #FFCA0B;
+    border-radius: 5px;
+    width: 30%;
+
+}
+
 
 
 

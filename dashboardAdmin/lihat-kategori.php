@@ -1,11 +1,5 @@
 <?php
 require '../dbconfig.php';
-
-$catQuery = "SELECT ID_Kategori, nama_kategori FROM kategori";
-$resultCat = $conn->query($catQuery);
-
-
-
 ?>
 <!DOCTYPE html>
 
@@ -21,6 +15,8 @@ $resultCat = $conn->query($catQuery);
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon-janlink.png" />
+    <!-- Sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,11 +24,11 @@ $resultCat = $conn->query($catQuery);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../assets/vendor/fonts/materialdesignicons.css" />
-    <!-- Font Awesome Kit -->
-    <script src="https://kit.fontawesome.com/05f405bcb5.js" crossorigin="anonymous"></script>
 
     <!-- Menu waves for no-customizer fix -->
     <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
+    <!-- Font Awesome Kit -->
+    <script src="https://kit.fontawesome.com/05f405bcb5.js" crossorigin="anonymous"></script>
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
@@ -45,6 +41,9 @@ $resultCat = $conn->query($catQuery);
 
     <!-- CSS -->
     <link rel="stylesheet" href="../style.css">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
@@ -54,8 +53,6 @@ $resultCat = $conn->query($catQuery);
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <!-- Sweetalert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -63,7 +60,6 @@ $resultCat = $conn->query($catQuery);
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
-
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
@@ -111,7 +107,7 @@ $resultCat = $conn->query($catQuery);
                                     <div data-i18n="Perfect Scrollbar">Tambah Pedagang</div>
                                 </a>
                             </li>
-                            <li class="menu-item active">
+                            <li class="menu-item">
                                 <a href="lihat-pedagang.php" class="menu-link">
                                     <div data-i18n="Text Divider">Lihat Pedagang</div>
                                 </a>
@@ -164,7 +160,7 @@ $resultCat = $conn->query($catQuery);
                                     <div data-i18n="Perfect Scrollbar">Tambah Kategori</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item active">
                                 <a href="lihat-kategori.php" class="menu-link">
                                     <div data-i18n="Perfect Scrollbar">Lihat Kategori</div>
                                 </a>
@@ -233,22 +229,18 @@ $resultCat = $conn->query($catQuery);
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Nama Pedagang</th>
-                                        <th scope="col">Jajanan</th>
-                                        <th scope="col">Deskripsi</th>
-                                        <th scope="col">No HP</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Thumbnail</th>
-                                        <th scope="col">Rute</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Kelola</th>
+                                        <th scope="col">Nama Kategori</th>
+                                        <th scope="col">Gambar Kategori</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
 
-                                    $sql = "SELECT * FROM pedagang";
+
+                                    $sql = "SELECT * FROM kategori";
                                     $result = $conn->query($sql);
 
 
@@ -256,40 +248,27 @@ $resultCat = $conn->query($catQuery);
                                     if ($result->num_rows > 0) {
                                         $counter = 1;
                                         while ($row = $result->fetch_assoc()) {
-                                            $modalId = $row['ID_Pedagang'];
-                                            $id_kategori = $row['ID_Kategori'];
-                                            $sqlCat = "SELECT * FROM kategori WHERE ID_Kategori=$id_kategori";
-                                            $resultCat = $conn->query($sqlCat);
-                                            $rowCat = $resultCat->fetch_assoc();
-                                            $nama_kategori = $rowCat['nama_kategori'];
+                                            $modalId = $row['ID_Kategori'];
+
 
 
                                             echo "<tr>
                             <td>$counter</td>
-                            <td>{$row['Nama_Pedagang']}</td>
-                            <td>{$row['Nama_Jajanan']}</td>
-                            <td>{$row['Deskripsi']}</td>
-                            <td>{$row['No_HP']}</td>
-                            <td>{$nama_kategori}</td>
-                            <td><img style='width:200px;' src='data:image/jpeg;base64," . base64_encode($row['Thumbnail']) . "' alt='Product Thumbnail'></td>    
-                            <td><img style='width:200px;' src='data:image/jpeg;base64," . base64_encode($row['Rute']) . "' alt='Product Thumbnail'></td>                       
-                            <td>{$row['Status']}</td>
+                            <td>{$row['nama_kategori']}</td>
+                            <td><img style='width:200px;' src='data:image/jpeg;base64," . base64_encode($row['gambar_kategori']) . "' alt='Kategori Image'></td>    
                              <td>
                                 <button
                                     type='button'
                                     class='btn btn-primary update-button mb-3'
                                     data-bs-toggle='modal'
                                     data-bs-target='#updateModal_{$modalId}'
-                                    data-nama='{$row['Nama_Pedagang']}'
-                                    data-jajanan='{$row['Nama_Jajanan']}'
-                                    data-deskripsi='{$row['Deskripsi']}'
-                                    data-nohp='{$row['No_HP']}'
-                                    data-kategori='{$nama_kategori}'
-                                    data-status='{$row['Status']}'
+                                    data-kategori='{$row['nama_kategori']}'
+                                   
+                                   
                                 >
                                 <i class='fa-solid fa-pen-to-square' style='color: #FFF;'></i>
                                 </button>
-                                <button class='btn btn-danger mb-3' href='javascript:void(0);' onclick='confirmDelete({$row['ID_Pedagang']})'><i class='fa-solid fa-trash' style='color: #ffffff;'></i></button>
+                                <button class='btn btn-danger mb-3' href='javascript:void(0);' onclick='confirmDelete({$row['ID_Kategori']})'><i class='fa-solid fa-trash' style='color: #ffffff;'></i></button>
                             </td>
                         </tr>";
 
@@ -298,74 +277,34 @@ $resultCat = $conn->query($catQuery);
                             <div class='modal-dialog'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
-                                        <h5 class='modal-title' id='updateModalLabel'>Perbarui Pedagang</h5>
+                                        <h5 class='modal-title' id='updateModalLabel'>Perbarui Produk</h5>
                                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                     </div>
                                     <div class='modal-body'>
-                                        <form action='update-server.php' method='POST' enctype='multipart/form-data'>
-                                            <input type='hidden' name='id_pedagang' value='{$row['ID_Pedagang']}'>
-                    
-                                            <div class='mb-3'>
-                                                <label for='updateNama' class='form-label'>Nama Pedagang</label>
-                                                <input type='text' class='form-control' id='updateNama' name='updateNama' value='{$row['Nama_Pedagang']}' required>
-                                            </div>
-                                            <div class='mb-3'>
-                                                <label for='updateJajanan' class='form-label'>Nama Jajanan</label>
-                                                <input type='text' class='form-control' id='updateJajanan' name='updateJajanan' value='{$row['Nama_Jajanan']}' required>
-                                            </div>
-                    
-                                            <div class='mb-3'>
-                                                <label for='updateDeskripsi' class='form-label'>Deskripsi</label>
-                                                <textarea class='form-control' id='updateDeskripsi' name='updateDeskripsi' rows='3'>{$row['Deskripsi']}</textarea>
-                                            </div>
-                                            <div class='mb-3'>
-                                                <label for='updateNohp' class='form-label'>No HP</label>
-                                                <textarea class='form-control' id='updateNohp' name='updateNohp' rows='3'>{$row['No_HP']}</textarea>
-                                            </div>
-            
-            
-                                            <div class='mb-3'>
-                        <label for='id_kategori' class='form-label'>Kategori</label>
-                        <select id='id_kategori' class='form-select' aria-label='Default select example' name='id_kategori' required>";
-                                            $sqlCat = "SELECT * FROM kategori";
-                                            $resultCat = $conn->query($sqlCat);
-
-                                            while ($rowCatloop = $resultCat->fetch_assoc()) {
-                                                echo "<option value='{$rowCatloop['ID_Kategori']}'>{$rowCatloop['nama_kategori']}</option>";
-                                            }
-                                            echo "</select>
-                    </div>
-            
-            
+                                        <form action='update-kategori-server.php' method='POST' enctype='multipart/form-data'>
+                                        <input type='hidden' name='id_kategori' value='{$row['ID_Kategori']}'>
                                             
                     
                                             <div class='mb-3'>
-                                            <img src='data:image/jpeg;base64," . base64_encode($row['Thumbnail']) . "' alt='Thumbnail'><br>
-                                                <label for='updateGambar' class='form-label'>Thumbnail</label>
-                                                <input type='file' class='form-control' id='updateThumbnail' name='updateThumbnail' required>
+                                                <label for='updateKategori' class='form-label'>Nama Kategori</label>
+                                                <input type='text' class='form-control' id='updateKategori' name='updateKategori' value='{$row['nama_kategori']}' required>
                                             </div>
+                                        
+                                            
+
+                   
+
+
+            
+                    
                                             <div class='mb-3'>
-                                            <img style='width:200px;' src='data:image/jpeg;base64," . base64_encode($row['Rute']) . "' alt='Rute'><br>
-                                                <label for='updateRute' class='form-label'>Rute</label>
-                                                <input type='file' class='form-control' id='updateRute' name='updateRute' required>
+                                            <img src='data:image/jpeg;base64," . base64_encode($row['gambar_kategori']) . "' alt='Thumbnail'><br>
+                                                <label for='updateGambar' class='form-label'>Gambar Kategori</label>
+                                                <input type='file' class='form-control' id='updateGambar' name='updateGambar' required>
                                             </div>
+                                            
 
-                                            <div class='mb-3'>
-                                            <label for='status' class='form-label'>Status</label>
-                                            <select id='status' class='form-select' aria-label='Default select example' name='status' required>";
-
-
-
-                                            if ($row['Status'] == 'Aktif') {
-                                                echo "<option value='Aktif' selected>Aktif</option>
-                                                      <option value='Non-Aktif'>Non-Aktif</option>";
-                                            } else {
-                                                echo "<option value='Aktif'>Aktif</option>
-                                                      <option value='Non-Aktif' selected>Non-Aktif</option>";
-                                            }
-
-                                            echo "</select>
-                                        </div>
+                                    
                                         
                     
                                             <!-- Add input fields for other product information -->
@@ -381,7 +320,7 @@ $resultCat = $conn->query($catQuery);
                                             $counter++;
                                         }
                                     } else {
-                                        echo "<tr><td colspan='6'>No products found</td></tr>";
+                                        echo "<tr><td colspan='6'>No category found</td></tr>";
                                     }
 
                                     ?>
@@ -389,19 +328,26 @@ $resultCat = $conn->query($catQuery);
                             </table>
                         </div>
                     </div>
-                    <!-- / Content -->
 
 
 
-                    <div class="content-backdrop fade"></div>
                 </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+
+            </div>
+            <!-- / Content -->
+
+
+
+            <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
@@ -415,6 +361,7 @@ $resultCat = $conn->query($catQuery);
     <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="../assets/vendor/js/menu.js"></script>
+
 
     <!-- endbuild -->
 
@@ -431,49 +378,6 @@ $resultCat = $conn->query($catQuery);
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua/C4z6Zaht6LeLZfJbf47P6KWpNMyW8jOG6Cr/Itg4PAO2E6b6uXMJXs" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            <?php
-            // Check for success message in the session
-            if (isset($_SESSION['duplicate'])) {
-                // Display SweetAlert for success
-                echo "Swal.fire({
-                icon: 'error',
-                timer: '2000',
-                title: 'Data Duplikat!',
-                text: '{$_SESSION['duplicate']}',
-                showConfirmButton: false
-            });";
-                // Unset the session variable to avoid displaying the message on page reload
-                unset($_SESSION['duplicate']);
-            } else if (isset($_SESSION['success'])) {
-                // Display SweetAlert for success
-                echo "Swal.fire({
-                icon: 'success',
-                timer: '2000',
-                title: 'Berhasil!',
-                text: '{$_SESSION['success']}',
-                showConfirmButton: false
-            });";
-                // Unset the session variable to avoid displaying the message on page reload
-                unset($_SESSION['success']);
-            } elseif (isset($_SESSION['error_tambah'])) {
-                // Display SweetAlert for error
-                echo "Swal.fire({
-                icon: 'error',
-                timer: '2000',
-                title: 'Gagal!',
-                text: '{$_SESSION['failed']}',
-                showConfirmButton: false
-            });";
-                // Unset the session variable to avoid displaying the message on page reload
-                unset($_SESSION['failed']);
-            }
-            ?>
-        });
-    </script>
-
     <script>
         function confirmDelete(productId) {
             Swal.fire({
@@ -486,37 +390,66 @@ $resultCat = $conn->query($catQuery);
                 confirmButtonText: 'Yes, Hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'delete-server.php?id=' + productId;
+                    window.location.href = 'delete-kategori-server.php?id=' + productId;
                 }
             });
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            <?php
+            // Check for success message in the session
+            if (isset($_SESSION['success_update_kategori'])) {
+                // Display SweetAlert for success
+                echo "Swal.fire({
+                icon: 'success',
+                title: 'Berhasil Perbarui!',
+                text: '{$_SESSION['success_update_kategori']}',
+            });";
+                // Unset the session variable to avoid displaying the message on page reload
+                unset($_SESSION['success_update_kategori']);
+            } elseif (isset($_SESSION['error_update_kategori'])) {
+                // Display SweetAlert for error
+                echo "Swal.fire({
+                icon: 'error',
+                title: 'Gagal Perbarui!',
+                text: '{$_SESSION['error_update_kategori']}',
+            });";
+                // Unset the session variable to avoid displaying the message on page reload
+                unset($_SESSION['error_update_kategori']);
+            }
+            ?>
+        });
     </script>
     <script>
         $(document).ready(function() {
             <?php
             // Check for success message in the session
-            if (isset($_SESSION['success_message'])) {
+            if (isset($_SESSION['success_delete'])) {
                 // Display SweetAlert for success
                 echo "Swal.fire({
                 icon: 'success',
-                title: 'Berhasil Perbarui!',
-                text: '{$_SESSION['success_message']}',
+                title: 'Berhasil Hapus!',
+                text: '{$_SESSION['success_delete']}',
             });";
                 // Unset the session variable to avoid displaying the message on page reload
-                unset($_SESSION['success_message']);
-            } elseif (isset($_SESSION['error_message'])) {
+                unset($_SESSION['success_delete']);
+            } elseif (isset($_SESSION['error_delete'])) {
                 // Display SweetAlert for error
                 echo "Swal.fire({
                 icon: 'error',
-                title: 'Gagal Perbarui!',
-                text: '{$_SESSION['error_message']}',
+                title: 'Gagal Hapus!',
+                text: '{$_SESSION['error_delete']}',
             });";
                 // Unset the session variable to avoid displaying the message on page reload
-                unset($_SESSION['error_message']);
+                unset($_SESSION['error_delete']);
             }
             ?>
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua/C4z6Zaht6LeLZfJbf47P6KWpNMyW8jOG6Cr/Itg4PAO2E6b6uXMJXs" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
